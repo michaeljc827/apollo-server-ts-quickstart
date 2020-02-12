@@ -8,6 +8,26 @@ const resolverMap: IResolvers = {
     Query: {
         users: (parent, args, context) => {
             return context.prisma.users();
+        },
+        me: (parent, args, context) => {
+
+            let decoded;
+
+            try {
+                decoded = jwt.verify(args.token, PRIVATE_KEY);
+            }
+            catch (e) {
+                return null;
+            }
+
+            const { userId } = decoded;
+
+            console.log(decoded);
+
+
+            return context.prisma.user({
+                id: userId
+            });
         }
     },
     Mutation: {

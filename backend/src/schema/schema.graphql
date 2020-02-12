@@ -1,6 +1,8 @@
 type Query {
     users: [User!]!
     user(id: ID!): User
+
+    me(token: String!): User
 }
 
 type Mutation {

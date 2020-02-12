@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../../../graphql/mutation';
 
+import { Redirect } from 'react-router-dom';
+
 const Login = () => {
 
     const emailRef = useRef(null);
@@ -41,8 +43,11 @@ const Login = () => {
 
     if (data) {
         if (data.login) {
-            console.log(data.login.token);
+            localStorage.setItem('userToken', data.login.token);
+            return <Redirect to="/dashboard" />
         }
+    } else {
+        localStorage.removeItem('userToken');
     }
 
 

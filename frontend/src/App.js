@@ -10,6 +10,7 @@ import {
   Route
 } from "react-router-dom";
 import Login from './components/Page/Login/Login';
+import Dashboard from './components/Page/Dashboard/Dashboard';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Login />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
         </Switch>
       </Router>
